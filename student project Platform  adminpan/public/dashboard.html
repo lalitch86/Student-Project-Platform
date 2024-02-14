@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+
+body {
+  font-family: Arial, sans-serif;
+  background-image: url('background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #fff;
+}
+h1 {
+  font-size: 2.5rem; /* Adjust font size as needed */
+  font-weight: bold;
+  text-align: center;
+  color: #ffffff; /* Adjust text color as needed */
+  margin-top: 20px; /* Adjust top margin as needed */
+  margin-bottom: 20px; /* Adjust bottom margin as needed */
+  padding: 10px; /* Adjust padding as needed */
+  border-bottom: 2px solid #ccc; /* Add a bottom border for separation */
+}
+
+.navbar-brand {
+
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.navbar-nav .nav-item {
+  margin-right: 15px;
+}
+.navbar-nav .nav-item:hover {
+
+transform: translateY(-5px); /* Move card slightly up on hover *//* Increase shadow on hover */
+
+}
+
+.navbar-nav .nav-item:last-child {
+  margin-right: 0;
+}
+
+.form-inline .form-control {
+  width: 300px;
+}
+
+.btn-primary,
+.btn-secondary {
+  margin: 10px;
+}
+
+
+#projects-list {
+  margin-top: 20px;
+}
+
+.project-card {
+  background-color: #333; /* Set background color for project card */
+  border-radius: 10px; /* Add border radius for rounded corners */
+  padding: 20px; /* Add padding for content */
+  margin-bottom: 20px; /* Add margin between project cards */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+}
+
+.project-card:hover {
+
+  transform: translateY(-5px); /* Move card slightly up on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+  background-color: #6c6a6a;
+}
+
+/* Target dynamically added h2 elements inside .project-card */
+.project-card h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #fff700;
+  text-transform: uppercase;
+  text-decoration: underline;
+}
+
+/* Target dynamically added p elements inside .project-card */
+.project-card p {
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+
+.project-card .btn {
+  background-color: #333; /* Set background color for project card */
+  border-radius: 10px; /* Add border radius for rounded corners */
+  margin-bottom: 20px; /* Add margin between project cards */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+  padding: 5px 10px;
+  border: none;
+  color: #00ff00;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.project-card .btn:hover {
+  transform: translateY(-5px); /* Move card slightly up on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+  background-color: #a9f800;
+}
+.card-header{
+  color: #333;
+}
+.container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #333;
+            border-radius: 8px;
+            counter-reset:#333 ;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+.container.text-center {
+  margin-top: 20px;
+  color: #00ff00;
+}
+
+.container .btn {
+  background-color: #333; /* Set background color for project card */
+  border-radius: 10px; /* Add border radius for rounded corners */
+  margin-bottom: 20px; /* Add margin between project cards */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+  padding: 5px 10px;
+  border: none;
+  color: #00ff00;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+.project-added-element {
+  background-color: #007bff;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-right: 5px;
+}
+
+.project-added-element:hover {
+  background-color: #0056b3;
+}
+
+
+    </style>
+</head>
+<body>
+   
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg lg:border-b-1 navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Dashboard</a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="/dashboard.html">Home <span class="sr-only">(current)</span></a>
+          </li>
+
+          <li class="nav-item active">
+            <a class="nav-link" href="/college.html">Colleges <span class="sr-only">(current)</span></a>
+          </li>
+          
+          <li class="nav-item active">
+            <a class="nav-link" href="/user.html">User <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/request.html">Request <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+            <form id="search-form" class="form-inline my-2 my-lg-0">
+                <input id="search-input" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              </form>
+            </li>
+    
+        <li class="nav-item active">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="logoutBtn">Logout</a>
+                    </li>
+            
+        </ul>
+   
+    </nav>
+    
+    <div class="container">
+        <h2 class="mt-5 mb-4">Manage Projects</h2>
+
+        <!-- Miniproject Form -->
+        <div class="card mb-4">
+            <div class="card-header">
+                Add New Miniproject<!-- Add Miniproject button -->
+                <button id="addMiniprojectBtn">Add Miniproject</button>
+                
+                <!-- Container for options/forms -->
+                <div id="miniprojectOptions" style="display: none;">
+                    <!-- Options/forms content will be dynamically inserted here -->
+                </div>
+                
+            </div>
+          
+        </div>
+        <div class="card mb-4">
+            <div class="card-header">
+        <h3>Delete Mini Project</h3>
+        <input type="text" id="projectId" placeholder="Enter Mini Project ID">
+        <button onclick="deleteMiniProject()">Delete Mini Project</button>
+    </div>
+    </div>
+    </div>
+    <div class="container mt-4" id="projects-list"></div>
+    <center>
+      <button id="prev-btn" class="btn btn-secondary">Previous</button>
+      <span id="page-number" class="ml-2"></span>
+      <button id="next-btn" class="btn btn-secondary ml-2">Next</button>
+    </center>
+
+
+
+    <!-- Include Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+   <!-- Include dashboard.js -->
+<script src="dashboard.js"></script>
+<script>
+    function deleteMiniProject() {
+      const projectId = document.getElementById('projectId').value;
+
+      // Make a DELETE request to delete the mini project
+      fetch(`/miniprojects/${projectId}`, {
+        method: 'DELETE'
+      })
+      .then(response => {
+        if (response.ok) {
+          alert('Mini project deleted successfully');
+        } else {
+          alert('Failed to delete mini project');
+        }
+      })
+      .catch(error => {
+        console.error('Error deleting mini project:', error);
+        alert('Failed to delete mini project');
+      });
+    }
+  </script>
+</body>
+</html>
+
+</body>
+</html>

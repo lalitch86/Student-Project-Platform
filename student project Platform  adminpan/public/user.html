@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Admins</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <style>
+       body {
+  font-family: Arial, sans-serif;
+  background-image: url('background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #fff;
+}
+h2 {
+  font-size: 2.5rem; /* Adjust font size as needed */
+  font-weight: bold;
+  text-align: center;
+  color: #ffffff; /* Adjust text color as needed */
+  margin-top: 20px; /* Adjust top margin as needed */
+  margin-bottom: 20px; /* Adjust bottom margin as needed */
+  padding: 10px; /* Adjust padding as needed */
+  border-bottom: 2px solid #ccc; /* Add a bottom border for separation */
+}
+
+.navbar-brand {
+
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.navbar-nav .nav-item {
+  margin-right: 15px;
+}
+.navbar-nav .nav-item:hover {
+
+transform: translateY(-5px); /* Move card slightly up on hover *//* Increase shadow on hover */
+
+}
+
+.navbar-nav .nav-item:last-child {
+  margin-right: 0;
+}
+
+
+        .container {
+            margin-top: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .btn-primary, .btn-danger {
+            width: 100px;
+            background-color: #333; /* Set background color for project card */
+            border-radius: 10px; /* Add border radius for rounded corners */
+            margin-bottom: 20px; /* Add margin between project cards */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+            padding: 5px 10px;
+            border: none;
+            color: #00ff00;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+        .btn:hover {
+  transform: translateY(-5px); /* Move card slightly up on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+  background-color: #a9f800;
+}
+        .table-container {
+            background-color:  #9b9898;; /* Set background color for project card */
+  border-radius: 10px; /* Add border radius for rounded corners */
+  padding: 20px; /* Add padding for content */
+  margin-bottom: 20px; /* Add margin between project cards */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+        }
+
+
+        .table-container:hover {
+
+transform: translateY(-5px); /* Move card slightly up on hover */
+box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+background-color: #6c6a6a;
+}
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg lg:border-b-1 navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Dashboard</a>
+
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="/dashboard.html">Home <span class="sr-only">(current)</span></a>
+          </li>
+
+          <li class="nav-item active">
+            <a class="nav-link" href="/college.html">Colleges <span class="sr-only">(current)</span></a>
+          </li>
+          
+          <li class="nav-item active">
+            <a class="nav-link" href="/user.html">User <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/request.html">Request <span class="sr-only">(current)</span></a>
+          </li>
+
+            
+        </ul>
+   
+    </nav>
+   
+    <div class="container">
+        <h1>Manage Admins</h1>
+
+        <!-- Add Admin Form -->
+        <div id="addAdminForm">
+            <h2>Add college </h2>
+            <div class="form-group">
+                <label for="cid">College Id:</label>
+                <input type="text" class="form-control" id="cid" placeholder="Enter College Id">
+            </div>
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" id="username" placeholder="Enter Username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" id="password" placeholder="Enter Password">
+            </div>
+            <button class="btn btn-primary" onclick="addAdmin()">Add</button>
+        </div>
+
+        <!-- Admin Table -->
+        <div class="table-container" id="adminTable"></div>
+    </div>
+
+    <!-- Include Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script>
+        // Function to add an admin
+        function addAdmin() {
+            const cid = document.getElementById('cid').value;
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Make a POST request to add the admin
+            fetch('/admins', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    cid:cid,
+                    username: username,
+                    password: password
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Admin added successfully');
+                    // Refresh the admin table
+                    fetchAdmins();
+                } else {
+                    alert('Failed to add admin');
+                }
+            })
+            .catch(error => {
+                console.error('Error adding admin:', error);
+                alert('Failed to add admin');
+            });
+        }
+
+        // Function to delete an admin
+        function deleteAdmin(adminId) {
+            // Make a DELETE request to delete the admin
+            fetch(`/admins/${adminId}`, {
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Admin deleted successfully');
+                    // Refresh the admin table
+                    fetchAdmins();
+                } else {
+                    alert('Failed to delete admin');
+                }
+            })
+            .catch(error => {
+                console.error('Error deleting admin:', error);
+                alert('Failed to delete admin');
+            });
+        }
+
+        // Function to fetch admins and display in table
+        function fetchAdmins() {
+            fetch('/admins')
+            .then(response => response.json())
+            .then(data => {
+                const adminTable = document.getElementById('adminTable');
+                adminTable.innerHTML = ''; // Clear previous data
+
+                if (data.length > 0) {
+                    const table = document.createElement('table');
+                    table.classList.add('table', 'table-striped');
+                    const headerRow = table.insertRow(0);
+                    const headers = ['Admin ID', 'Username', 'Actions'];
+                    headers.forEach(header => {
+                        const th = document.createElement('th');
+                        th.textContent = header;
+                        headerRow.appendChild(th);
+                    });
+
+                    data.forEach(admin => {
+                        const row = table.insertRow();
+                        row.innerHTML = `<td>${admin.id}</td>
+                        <td>${admin.college_id}</td>
+                                         <td>${admin.username}</td>
+                                         <td>
+                                            <button class="btn btn-danger btn-sm" onclick="deleteAdmin(${admin.id})">Delete</button>
+                                         </td>`;
+                    });
+
+                    adminTable.appendChild(table);
+                } else {
+                    adminTable.textContent = 'No admins found';
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching admins:', error);
+            });
+        }
+
+        // Fetch admins on page load
+        window.onload = fetchAdmins;
+    </script>
+</body>
+</html>

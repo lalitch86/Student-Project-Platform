@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universities</title>
+  
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="university.css">
+</head>
+<body><nav class="navbar navbar-expand-lg lg:border-b-1 navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Students Project Platform</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="/index.html">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/category.html">Categories <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/college.html">Colleges <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/university.html">University <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/aboutus.html">About Us <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/contactus.html">Contact Us <span class="sr-only">(current)</span></a>
+      </li>
+  
+    </ul>
+    
+   
+  </div>
+</nav>
+
+    <h1>List of Universities</h1>
+ <ul id="university-list" class="university-list"></ul>
+
+
+    
+
+ <script>
+  fetch('/universities')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Process the data received from the server
+      console.log(data); // or do something else with the data
+      displayUniversities(data); // Example: display universities on the webpage
+    })
+    .catch(error => {
+      console.error('There was a problem with the fetch operation:', error);
+    });
+  
+  function displayUniversities(universities) {
+    // Assuming there's a <ul> element with id="university-list" in your HTML
+    const universityList = document.getElementById('university-list');
+  
+    universities.forEach(university => {
+      const listItem = document.createElement('li');
+      listItem.textContent = university.university_name;
+      universityList.appendChild(listItem);
+    });
+  }
+  </script>
+</body>
+</html>

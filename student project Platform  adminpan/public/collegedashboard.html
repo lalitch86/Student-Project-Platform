@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Dashboard</title>
+    
+    <!-- Add your CSS file -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>College Dashboard</h2>
+        <div id="collegeNameDisplay">
+            <h3>Welcome, <span id="collegeName"></span>!</h3>
+        </div>
+    </div>
+    <!-- Add your JavaScript file -->
+    <script >
+
+document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const collegeName = urlParams.get('college');
+
+    if (collegeName) {
+        document.getElementById('collegeName').textContent = collegeName;
+    } else {
+        // College name not found in URL, handle accordingly (e.g., redirect to login page)
+        window.location.href = '/login.html'; // Redirect to the login page
+    }
+});
+
+    </script>
+</body>
+</html>

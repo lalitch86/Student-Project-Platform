@@ -1,0 +1,105 @@
+<!-- projectDetails.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Details</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <style>
+
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url('background.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #fff;
+    }
+    
+    .navbar-brand {
+    
+      font-weight: bold;
+      font-size: 24px;
+    }
+    
+    .navbar-nav .nav-item {
+      margin-right: 15px;
+    }
+    .navbar-nav .nav-item:hover {
+    
+    transform: translateY(-5px); /* Move card slightly up on hover *//* Increase shadow on hover */
+    
+    }
+    
+    .navbar-nav .nav-item:last-child {
+      margin-right: 0;
+    }
+    
+    .form-inline .form-control {
+      width: 300px;
+    }
+    
+    .btn-primary,
+    .btn-secondary {
+      margin: 10px;
+    }
+    
+    
+    #projects-list {
+      margin-top: 20px;
+    }
+    
+    .project-card {
+      background-color: #333; /* Set background color for project card */
+      border-radius: 10px; /* Add border radius for rounded corners */
+      padding: 20px; /* Add padding for content */
+      margin-bottom: 20px; /* Add margin between project cards */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+    }
+    
+  
+    
+    /* Target dynamically added p elements inside .project-card */
+    .project-card p {
+      font-size: 18px;
+      color: #ffffff;
+      margin-bottom: 15px;
+    }
+      </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg lg:border-b-1 navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Dashboard</a>
+
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="/dashboard.html">Home <span class="sr-only">(current)</span></a>
+      </li>
+
+      <li class="nav-item active">
+        <a class="nav-link" href="/college.html">Colleges <span class="sr-only">(current)</span></a>
+      </li>
+  
+      <li class="nav-item active">
+        <a class="nav-link" href="/user.html">User <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/request.html">Request <span class="sr-only">(current)</span></a>
+      </li>
+      
+
+        
+    </ul>
+
+</nav>
+
+  <div class="container mt-4">
+    <div id="project-details"></div>
+  </div>
+
+  <script src="projectDetails.js"></script>
+</body>
+</html>

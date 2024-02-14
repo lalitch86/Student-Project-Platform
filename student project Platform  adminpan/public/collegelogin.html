@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+            max-width: 400px;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+            color: #333;
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <!-- Add your CSS file -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>College Login</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        <div id="collegeNameDisplay" style="display: none;">
+            <h3>Welcome, <span id="collegeName"></span>!</h3>
+        </div>
+        <div id="projectsList">
+            <!-- Project cards will be dynamically added here -->
+        </div>
+    </div>
+    <!-- Add your JavaScript file -->
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Make a POST request to your backend to authenticate the user
+            fetch('/loginn', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Hide the login form
+                    document.getElementById('loginForm').style.display = 'none';
+                    // Display the college name
+                    document.getElementById('collegeName').textContent = data.collegeName;
+                    document.getElementById('collegeNameDisplay').style.display = 'block';
+                    // Fetch and display projects related to the logged-in college
+                    fetch('/projects', {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(projects => {
+                        const projectsList = document.getElementById('projectsList');
+                        projects.forEach(project => {
+                            if (project.collegeName === data.collegeName) {
+                                const projectCard = document.createElement('div');
+                                projectCard.classList.add('project-card');
+                                projectCard.innerHTML = `
+                                    <h4>${project.title}</h4>
+                                    <p>${project.description}</p>
+                                `;
+                                projectsList.appendChild(projectCard);
+                            }
+                        });
+                    })
+                    .catch(error => console.error('Error fetching projects:', error));
+                } else {
+                    alert('Invalid username or password');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
